@@ -1,10 +1,10 @@
 const express=require('express');
 const v1Router = require('./routes/v1');
-const User =require('../src/models/user.model');
 const connect =require('../src/config/db.config')
 
+
 const app=express();
-const PORT=3100;
+const {PORT}=require("../src/config/server.cofig")
 
 app.use(express.json());
 app.use("/api/v1",v1Router)
@@ -19,20 +19,9 @@ app.use("/api/v1",v1Router)
 // })
 
 app.listen(PORT,async ()=>{
-    console.log("The server started at ",PORT);
+    console.log(`The server started at ${PORT}`);
     await connect()
-    
-    // const user=await User.create({
-    // "email":"dummy@test.com",
-    // "password":"1346545",
-    // "role":"User",
-    // "location":{
-    //      "coordinates":[77.12345, 28.54321]
-    // }
 
-// })
-// console.log(user)
-    
 })
 
 

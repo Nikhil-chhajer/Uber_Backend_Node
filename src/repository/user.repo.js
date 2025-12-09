@@ -11,13 +11,15 @@ async function createuser(response){
     }
 }
 
-async function finduser(userId){
+async function finduser(email){
     try {
-        const user= await User.findById(userId);
+        const user= await User.findOne({
+            email:email
+        });
         if(!user){
-            return false;
+            return null;
         }
-        return true;
+        return user;
     } catch (error) {
         console.log(error);
         

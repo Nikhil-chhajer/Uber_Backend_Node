@@ -1,5 +1,5 @@
 const express=require('express');
-const { createusercontroller } = require('../../controller/user.controller');
+const { createusercontroller,createuserlogin } = require('../../controller/user.controller');
 const v1Router=express.Router();
 
 v1Router.get("/",(request,response)=>{
@@ -8,4 +8,5 @@ v1Router.get("/",(request,response)=>{
 })
 
 v1Router.post("/create",createusercontroller)
+v1Router.post("/login",createuserlogin)
 module.exports=v1Router;
