@@ -22,16 +22,16 @@ app.listen(PORT,async ()=>{
     console.log("The server started at ",PORT);
     await connect()
     
-    const user=await User.create({
-    "email":"dummy@test.com",
-    "password":"1346545",
-    "role":"User",
-    "location":{
-         "coordinates":[77.12345, 28.54321]
-    }
+    // const user=await User.create({
+    // "email":"dummy@test.com",
+    // "password":"1346545",
+    // "role":"User",
+    // "location":{
+    //      "coordinates":[77.12345, 28.54321]
+    // }
 
-})
-console.log(user)
+// })
+// console.log(user)
     
 })
 

@@ -1,9 +1,9 @@
 const User=require('../models/user.model');
 
 
-async function create(){
+async function createuser(response){
     try {
-        const user=await User.create();
+        const user=await User.create(response);
         return user;
     } catch (error) {
         console.log(error);
@@ -22,4 +22,8 @@ async function finduser(userId){
         console.log(error);
         
     }
+}
+
+module.exports={
+    createuser,finduser
 }
