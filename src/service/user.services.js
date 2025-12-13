@@ -1,6 +1,6 @@
 const {createuser,finduser} =require('../repository/user.repo')
 const jwt=require('jsonwebtoken')
-const {JWT_SECRET_KEY}=require("../config/server.cofig")
+const {JWT_SECRET_KEY}=require("../config/server.config")
 const bcrypt=require('bcrypt')
 async function createuserservice(response){
     try {
@@ -23,8 +23,10 @@ async function login(email,password){
         if(!ispasswordmatch){
             return "Enter correct password";
         }
-        const generatedtoken=generatejwttoken(user._id);
-        return generatedtoken;
+        const generatedtoken=await generatejwttoken(user._id);
+        console.log(generatedtoken)
+        const userid=user._id;
+        return {generatedtoken,userid};
 
 
     } catch (error) {
@@ -39,10 +41,12 @@ async function generatejwttoken(userId){
     const token=jwt.sign({
         userId:userId,
 
-    },JWT_SECRET_KEY,{expiresIn:'1h'})
+    },"secretkey",{expiresIn:'90h'})
     return token;
 
 }
+
+
 
 module.exports={
     createuserservice,login

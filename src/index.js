@@ -1,13 +1,16 @@
 const express=require('express');
 const v1Router = require('./routes/v1');
 const connect =require('../src/config/db.config')
-
-
+const {initRedis} =require('../src/config/redis.config')
+const{findnearbydriver}=require('../src/service/updatedriverlocation.service')
 const app=express();
-const {PORT}=require("../src/config/server.cofig")
+const {PORT}=require("../src/config/server.config")
 
+const cors=require('cors')
+app.use(cors());
 app.use(express.json());
 app.use("/api/v1",v1Router)
+
 
 
 
@@ -18,9 +21,15 @@ app.use("/api/v1",v1Router)
 //     console.log("The server started at ",PORT);
 // })
 
+
 app.listen(PORT,async ()=>{
     console.log(`The server started at ${PORT}`);
-    await connect()
+    await connect();
+    console.log("Mongo connected");
+    await initRedis();
+
+    // const response=await findnearbydriver( -123.41939896345139,30.774899994483164);
+    // console.log("the response is",response)
 
 })
 
